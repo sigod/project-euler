@@ -2,6 +2,7 @@ module pu_005;
 
 import std.conv : to;
 import std.stdio;
+import helpers.primenumbers : getPrimeNumbers;
 
 enum ulong problemAnswer = getEvenlyDivisibleNumber(20);
 
@@ -36,36 +37,7 @@ ulong getEvenlyDivisibleNumber(ulong to) {
 	return result;
 }
 
-ulong[] getPrimeNumbers(ulong up_to) {
-	if (up_to < 2) return [];
-
-	ulong[] primes = [2];
-
-	foreach (ulong number; 3..up_to + 1) {
-		bool isPrime = true;
-
-		foreach (ulong prime; primes) {
-			if (number % prime == 0) {
-				isPrime = false;
-				break;
-			}
-		}
-
-		if (isPrime) {
-			primes ~= number;
-		}
-	}
-
-	return primes;
-}
-
-
 unittest {
-	static assert(getPrimeNumbers(1).length == 0);
-	static assert(getPrimeNumbers(2).length == 1);
-	static assert(getPrimeNumbers(5).length == 3);
-	static assert(getPrimeNumbers(20).length == 8);
-
 	static assert(getEvenlyDivisibleNumber(1) == 1);
 	static assert(getEvenlyDivisibleNumber(2) == 2);
 	static assert(getEvenlyDivisibleNumber(3) == 6);
