@@ -6,10 +6,10 @@ pure ulong[] getPrimeNumbers(ulong up_to) {
 
 	ulong[] primes = [2];
 
-	foreach (ulong number; 3..up_to + 1) {
+	for (ulong number = 3; number <= up_to; number += 2) {
 		bool isPrime = true;
 
-		foreach (ulong prime; primes) {
+		foreach (prime; primes) {
 			if (number % prime == 0) {
 				isPrime = false;
 				break;
