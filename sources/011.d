@@ -26,7 +26,8 @@ const ubyte[20][20] matrix = [
 ];
 
 void main() {
-	uint max = 0;
+	uint max = 0,
+		tmp;
 
 	foreach (i, ref row; matrix) {
 		foreach (j, ref cell; row) {
@@ -36,17 +37,21 @@ void main() {
 				right = j <= row.length - 4;
 
 			if (right) {
-				// calc right
+				tmp = cell * row[j + 1] * row[j + 2] * row[j + 3];
+				if (max < tmp) max = tmp;
 			}
 
 			if (down) {
-				// calc down
+				tmp = cell * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
+				if (max < tmp) max = tmp;	
 
 				if (left) {
-					// calc diagonally (down, left)
+					tmp = cell * matrix[i + 1][j - 1] * matrix[i + 2][j - 2] * matrix[i + 3][j - 3];
+					if (max < tmp) max = tmp;					
 				}
 				if (right) {
-					// calc diagonally (down, right)
+					tmp = cell * matrix[i + 1][j + 1] * matrix[i + 2][j + 2] * matrix[i + 3][j + 3];
+					if (max < tmp) max = tmp;
 				}
 			}
 		}
